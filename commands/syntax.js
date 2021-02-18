@@ -152,19 +152,21 @@ module.exports = {
     name: 'syntax',
     description: 'Get an image and title from a random r/programmerhumor post',
     execute(msg, args) {
-        const arg = args[0].toLowerCase().replace(/\b#/, 'sharp')
+        let arg = args.length != 0 ? args[0].toLowerCase().replace(/\b#/, 'sharp') : '';
         if (scripts.includes(`\`${arg}\``)) {
+            arg = arg == 'lolcode' ? 'LOLCODE' : 'lolcode';
             msg.channel.send(`https://learnxinyminutes.com/docs/${arg.replace(/`/g, "")}/`)
         } else if (args == 'options') {
-            msg.channel.send({"embed":
-                  {
+            msg.channel.send({
+                "embed":
+                {
                     "title": "__Syntax Options__",
                     "description": `${scripts.toString().replace(/,/g, ' ')}`,
                     "url": "https://learnxinyminutes.com",
                     "color": null
-                  }
-              });
-            
+                }
+            });
+
         } else {
             msg.channel.send('Uh Oh! that is either not a valid language or isn\'t supported by this database. for all the valid languages please do \"!syntax options\"')
         }

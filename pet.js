@@ -8,7 +8,7 @@ client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 require('dotenv').config({ path: "./.env" });
 
-const TOKEN = process.env.BOTTOKEN;
+const TOKEN = process.env.TESTTOKEN;
 client.login(TOKEN);
 
 for (const file of commandFiles) {
@@ -32,12 +32,12 @@ client.on('message', msg => {
     if (msg.content == `${prefix}help`) {
         msg.channel.send({
             "embed":
-              {
+            {
                 "title": "__Command List__",
                 "description": `${commandList.toString().replace(/,/g, "\n")}`,
                 "color": 4234092
-              }
-          });
+            }
+        });
     }
 })
 client.on('message', msg => {
@@ -45,7 +45,7 @@ client.on('message', msg => {
 
     const args = msg.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
-
+    console.log(command);
     if (!client.commands.has(command)) return;
 
     try {
